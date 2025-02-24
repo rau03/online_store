@@ -6,7 +6,7 @@ import Cart from "@/components/Cart";
 import EmailInput from "@/components/EmailInput";
 
 export const metadata = {
-  title: "The Code Store",
+  title: "Smolstore",
   description: "A super cool store for programmers and productivity!",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <div id="portal" />
         <div id="app">
           <header>
-            <div className="header-conent">
+            <div className="header-content">
               <Link href={"/"}>
                 <h1>Smolstore</h1>
               </Link>
@@ -42,18 +42,25 @@ export default function RootLayout({ children }) {
           <div className="links-container">
             <div>
               <h3>Smoljames</h3>
-              <Link href={"/"}>Smoljames Hub</Link>
-              <Link href={"/cart"}>Roadmaps</Link>
+              <Link target="_blank" href={"/"}>
+                Smoljames Hub
+              </Link>
+              <Link target="_blank" href={"/"}>
+                Roadmap
+              </Link>
             </div>
-            <h3>Store</h3>
-            <Link href={"/"}>Home</Link>
-            <Link href={"/"}>Cart</Link>
+            <div>
+              <h3>Store</h3>
+              <Link href={"/"}>Home</Link>
+              <Link href={"/cart"}>Cart</Link>
+            </div>
+            <div>
+              <h3>Support</h3>
+              <Link href={"/contact"}>Contact</Link>
+              <Link href={"/faq"}>FAQs</Link>
+            </div>
           </div>
-          <div>
-            <h3>Support</h3>
-            <Link href={"/"}>Contact</Link>
-            <Link href={"/"}>FAQs</Link>
-          </div>
+          
           <div className="socials">
             <p>
               ©{" "}

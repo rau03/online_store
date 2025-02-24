@@ -1,7 +1,13 @@
+import ImageBanner from "@/components/ImageBanner";
+import Products from "@/components/Products";
+
 export default function Home() {
   return (
-    <div>
-      ABCD1234
-    </div>
+    <>
+      <ImageBanner />
+      <section>
+        <Products />
+      </section>
+    </>
   );
 }
