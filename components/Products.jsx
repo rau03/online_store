@@ -1,6 +1,13 @@
 "use client";
 
+import { useState } from "react";
+import Portal from "./Portal";
+import { useProducts } from "@/context/ProductContext";
+
 export default function Products() {
+  const [portalImage, setPortalImage] = useState(null);
+  const { handleIncrementProduct } = useProducts();
+
   const stickerDescriptions = {
     CSS_HTML_Javascript:
       "Core web technologies for structure, styling, interactivity.",
@@ -13,20 +20,57 @@ export default function Products() {
     React: "Javascript library for building interactive user interfaces.",
   };
 
-  const stickers = Object.keys(stickerDescriptions);
+  const stickers = Object.entries(stickerDescriptions).map(
+    ([name, description]) => ({
+      name,
+      description,
+      prices: [{ unit_amount: 999 }], // Default price of $9.99
+      default_price: name.toLowerCase().replace(/_/g, "-"), // Create a default price ID
+      imageName:
+        name === "PostgresSQL"
+          ? "PostgreSQL"
+          : name === "Next"
+          ? "NextJS"
+          : name === "Node"
+          ? "NodeJS"
+          : name === "React"
+          ? "ReactJS"
+          : name,
+    })
+  );
 
   return (
     <>
+      {portalImage && (
+        <Portal
+          handleClosePortal={() => {
+            setPortalImage(null);
+          }}
+        >
+          <div className="portal-content">
+            <img
+              className="img-display"
+              src={`med_res/${portalImage}.jpeg`}
+              alt={`${portalImage}-high-res`}
+            />
+          </div>
+        </Portal>
+      )}
       <div className="section-container">
         <div className="section-header">
           <h2>Shop Our Selection</h2>
-          <p>From organization to accessoriztion</p>
+          <p>From organisation or accessorization</p>
         </div>
 
-        <div className="planner-content">
+        <div className="planner-container">
           <div>
-            <button className="img-button">
-              <img src="low_res/planner.jpeg" alt="high_res-planner" />
+            <button
+              onClick={() => {
+                setPortalImage("planner");
+              }}
+              className="img-button"
+            >
+              <img src="low_res/planner.jpeg" alt="high-res-planner" />
             </button>
           </div>
           <div className="planner-info">
@@ -58,7 +102,19 @@ export default function Products() {
               </li>
             </ul>
             <div className="purchase-btns">
-              <button>Add to Cart</button>
+              <button
+                onClick={() => {
+                  const plannerPriceId = "planner-sticker";
+                  handleIncrementProduct(plannerPriceId, 1, {
+                    name: "Medieval Dragon Month Planner",
+                    description: "A beautiful planner with dragon artwork",
+                    prices: [{ unit_amount: 1499 }],
+                    default_price: plannerPriceId,
+                  });
+                }}
+              >
+                Add to cart
+              </button>
             </div>
           </div>
         </div>
@@ -66,29 +122,38 @@ export default function Products() {
 
       <div className="section-container">
         <div className="section-header">
-          <h2>Or Collect your favorite Tech</h2>
+          <h2>Or Collect Your Favorite Tech</h2>
           <p>Choose from our custom designed tech logos</p>
         </div>
         <div className="sticker-container">
-                  {stickers.map((sticker, stickerIndex) => {
-              
+          {stickers.map((sticker, stickerIndex) => {
             return (
               <div key={stickerIndex} className="sticker-card">
-                <button className="img-button">
+                <button
+                  onClick={() => {
+                    setPortalImage(sticker.imageName);
+                  }}
+                  className="img-button"
+                >
                   <img
-                    src={`low_res/${sticker}.jpeg`}
-                    alt={`${sticker}-low-res`}
+                    src={`low_res/${sticker.imageName}.jpeg`}
+                    alt={`${sticker.imageName}-low-res`}
                   />
                 </button>
                 <div className="sticker-info">
-                  <p className="text-medium">
-                    {sticker.replaceAll("_", " ")} sticker.png
-                  </p>
-                  <p>{stickerDescriptions[sticker]}</p>
+                  <p className="text-medium">{sticker.name}</p>
+                  <p>{sticker.description}</p>
                   <h4>
-                    <span>$</span>5.99
+                    <span>$</span>
+                    {sticker.prices[0].unit_amount / 100}
                   </h4>
-                  <button>Add to Cart</button>
+                  <button
+                    onClick={() => {
+                      handleIncrementProduct(sticker.default_price, 1, sticker);
+                    }}
+                  >
+                    Add to cart
+                  </button>
                 </div>
               </div>
             );
