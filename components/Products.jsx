@@ -13,11 +13,11 @@ export default function Products() {
       "Core web technologies for structure, styling, interactivity.",
     Docker: "Platform for containerizing, deploying, and scaling applications.",
     Firebase: "Cloud platform for databases, authentication, and app backend.",
-    Next: "React-based framework for server-side rendering and static sites",
-    Node: "Javascript runtime for building scalable backend applications.",
+    Next: "React-based framework for server-side rendering and static sites.",
+    Node: "JavaScript runtime for building scalable backend applications.",
     PostgresSQL:
       "Robust open-source database with advanced querying capabilities.",
-    React: "Javascript library for building interactive user interfaces.",
+    React: "JavaScript library for building interactive user interfaces.",
   };
 
   const stickers = Object.entries(stickerDescriptions).map(

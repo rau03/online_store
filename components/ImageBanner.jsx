@@ -36,10 +36,10 @@ export default function ImageBanner() {
             <h3>Welcome to</h3>
             <h1>The Smoljames Store</h1>
           </div>
-        </div>
-        <div>
-          <button>Shop Stickers</button>
-          <button>Shop Planner</button>
+          <div>
+            <button>Shop Stickers</button>
+            <button>Shop Planner</button>
+          </div>
         </div>
       </div>
     </div>
