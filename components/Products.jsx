@@ -1,43 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Portal from "./Portal";
 import { useProducts } from "@/context/ProductContext";
 
 export default function Products() {
   const [portalImage, setPortalImage] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { handleIncrementProduct } = useProducts();
 
-  const stickerDescriptions = {
-    CSS_HTML_Javascript:
-      "Core web technologies for structure, styling, interactivity.",
-    Docker: "Platform for containerizing, deploying, and scaling applications.",
-    Firebase: "Cloud platform for databases, authentication, and app backend.",
-    Next: "React-based framework for server-side rendering and static sites.",
-    Node: "JavaScript runtime for building scalable backend applications.",
-    PostgresSQL:
-      "Robust open-source database with advanced querying capabilities.",
-    React: "JavaScript library for building interactive user interfaces.",
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/products");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (err) {
+        setError(err.message);
+        console.error("Error fetching products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const stickers = Object.entries(stickerDescriptions).map(
-    ([name, description]) => ({
-      name,
-      description,
-      prices: [{ unit_amount: 999 }], // Default price of $9.99
-      default_price: name.toLowerCase().replace(/_/g, "-"), // Create a default price ID
-      imageName:
-        name === "PostgresSQL"
-          ? "PostgreSQL"
-          : name === "Next"
-          ? "NextJS"
-          : name === "Node"
-          ? "NodeJS"
-          : name === "React"
-          ? "ReactJS"
-          : name,
-    })
-  );
+    fetchProducts();
+  }, []);
+
+  if (loading) return <div>Loading products...</div>;
+  if (error) return <div>Error loading products: {error}</div>;
 
   return (
     <>
@@ -126,38 +121,36 @@ export default function Products() {
           <p>Choose from our custom designed tech logos</p>
         </div>
         <div className="sticker-container">
-          {stickers.map((sticker, stickerIndex) => {
-            return (
-              <div key={stickerIndex} className="sticker-card">
+          {products.map((product) => (
+            <div key={product.id} className="sticker-card">
+              <button
+                onClick={() => {
+                  setPortalImage(product.name);
+                }}
+                className="img-button"
+              >
+                <img
+                  src={`low_res/${product.name}.jpeg`}
+                  alt={`${product.name}-low-res`}
+                />
+              </button>
+              <div className="sticker-info">
+                <p className="text-medium">{product.name}</p>
+                <p>{product.description}</p>
+                <h4>
+                  <span>$</span>
+                  {product.prices[0]?.unit_amount / 100 || 9.99}
+                </h4>
                 <button
                   onClick={() => {
-                    setPortalImage(sticker.imageName);
+                    handleIncrementProduct(product.default_price, 1, product);
                   }}
-                  className="img-button"
                 >
-                  <img
-                    src={`low_res/${sticker.imageName}.jpeg`}
-                    alt={`${sticker.imageName}-low-res`}
-                  />
+                  Add to cart
                 </button>
-                <div className="sticker-info">
-                  <p className="text-medium">{sticker.name}</p>
-                  <p>{sticker.description}</p>
-                  <h4>
-                    <span>$</span>
-                    {sticker.prices[0].unit_amount / 100}
-                  </h4>
-                  <button
-                    onClick={() => {
-                      handleIncrementProduct(sticker.default_price, 1, sticker);
-                    }}
-                  >
-                    Add to cart
-                  </button>
-                </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </>
