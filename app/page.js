@@ -4,29 +4,41 @@ import Products from "@/components/Products";
 export async function getProducts() {
   try {
     console.log("Fetching products from API...");
-    const response = await fetch("http://localhost:3001/api/products");
+    const response = await fetch(
+      new URL(
+        "/api/products",
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+      )
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const products = await response.json();
-    console.log("Products fetched successfully:", products.length);
-    return products;
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
   }
 }
 
-export default async function Home(props) {
+export default async function Home() {
   const products = await getProducts();
-  console.log("Products in Home component:", products.length);
+
+  // Separate planner and stickers from the products array
+  let planner = null;
+  let stickers = [];
+  if (Array.isArray(products)) {
+    planner = products.find((p) => p.name === "Medieval Dragon Month Planner");
+    stickers = products.filter(
+      (p) => p.name !== "Medieval Dragon Month Planner"
+    );
+  }
 
   return (
-    <>
+    <main>
       <ImageBanner />
-      <section>
-        <Products />
-      </section>
-    </>
+      {/* Pass planner and stickers as separate props */}
+      <Products planner={planner} stickers={stickers} />
+    </main>
   );
 }

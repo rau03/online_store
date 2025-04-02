@@ -4,35 +4,18 @@ import { useState, useEffect } from "react";
 import Portal from "./Portal";
 import { useProducts } from "@/context/ProductContext";
 
-export default function Products() {
+export default function Products(props) {
+  const { planner, stickers } = props;
+  console.log(planner);
+  console.log(stickers);
   const [portalImage, setPortalImage] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { handleIncrementProduct } = useProducts();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("/api/products");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (err) {
-        setError(err.message);
-        console.error("Error fetching products:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { handleIncrementProduct, cart } = useProducts();
+  console.log(cart);
 
-    fetchProducts();
-  }, []);
-
-  if (loading) return <div>Loading products...</div>;
-  if (error) return <div>Error loading products: {error}</div>;
+  if (!stickers.length || !planner) {
+    return null;
+  }
 
   return (
     <>
@@ -99,13 +82,8 @@ export default function Products() {
             <div className="purchase-btns">
               <button
                 onClick={() => {
-                  const plannerPriceId = "planner-sticker";
-                  handleIncrementProduct(plannerPriceId, 1, {
-                    name: "Medieval Dragon Month Planner",
-                    description: "A beautiful planner with dragon artwork",
-                    prices: [{ unit_amount: 1499 }],
-                    default_price: plannerPriceId,
-                  });
+                  const plannerPriceId = planner.default_price;
+                  handleIncrementProduct(plannerPriceId, 1, planner);
                 }}
               >
                 Add to cart
@@ -121,36 +99,43 @@ export default function Products() {
           <p>Choose from our custom designed tech logos</p>
         </div>
         <div className="sticker-container">
-          {products.map((product) => (
-            <div key={product.id} className="sticker-card">
-              <button
-                onClick={() => {
-                  setPortalImage(product.name);
-                }}
-                className="img-button"
-              >
-                <img
-                  src={`low_res/${product.name}.jpeg`}
-                  alt={`${product.name}-low-res`}
-                />
-              </button>
-              <div className="sticker-info">
-                <p className="text-medium">{product.name}</p>
-                <p>{product.description}</p>
-                <h4>
-                  <span>$</span>
-                  {product.prices[0]?.unit_amount / 100 || 9.99}
-                </h4>
+          {stickers.map((sticker, stickerIndex) => {
+            const stickerName = sticker.name;
+            const stickerImgUrl = sticker.name
+              .replaceAll(" Sticker.png", "")
+              .replaceAll(" ", "_");
+            return (
+              <div key={stickerIndex} className="sticker-card">
                 <button
                   onClick={() => {
-                    handleIncrementProduct(product.default_price, 1, product);
+                    setPortalImage(stickerImgUrl);
                   }}
+                  className="img-button"
                 >
-                  Add to cart
+                  <img
+                    src={`low_res/${stickerImgUrl}.jpeg`}
+                    alt={`${stickerImgUrl}-low-res`}
+                  />
                 </button>
+                <div className="sticker-info">
+                  <p className="text-medium">{stickerName}</p>
+                  <p>{sticker.description}</p>
+                  <h4>
+                    <span>$</span>
+                    {sticker.prices[0].unit_amount / 100}
+                  </h4>
+                  <button
+                    onClick={() => {
+                      const stickerPriceId = sticker.default_price;
+                      handleIncrementProduct(stickerPriceId, 1, sticker);
+                    }}
+                  >
+                    Add to cart
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </>
