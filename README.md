@@ -1,6 +1,5 @@
 # 🛍️ Smolstore - A Modern E-commerce Experience
 
-![Smolstore Banner](med_res/banner.png)
 
 ## 🌟 Overview
 
