@@ -5,37 +5,59 @@ import { createContext, useContext, useState } from "react";
 const ProductContext = createContext();
 
 export function ProductProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({});
 
   const handleIncrementProduct = (priceId, quantity, product) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.priceId === priceId);
+      const existingItem = prevCart[priceId];
+      const newQuantity = existingItem
+        ? existingItem.quantity + quantity
+        : quantity;
 
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.priceId === priceId
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
+      // If quantity is 0 or negative, remove the item from cart
+      if (newQuantity <= 0) {
+        const newCart = { ...prevCart };
+        delete newCart[priceId];
+        return newCart;
       }
 
-      return [...prevCart, { priceId, quantity, product }];
+      if (existingItem) {
+        return {
+          ...prevCart,
+          [priceId]: {
+            ...existingItem,
+            quantity: newQuantity,
+          },
+        };
+      }
+
+      return {
+        ...prevCart,
+        [priceId]: {
+          quantity,
+          name: product.name,
+          description: product.description,
+          prices: product.prices,
+          images: product.images,
+        },
+      };
     });
   };
 
   const handleDecrementProduct = (priceId) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.priceId === priceId);
+      const existingItem = prevCart[priceId];
 
       if (existingItem && existingItem.quantity > 1) {
-        return prevCart.map((item) =>
-          item.priceId === priceId
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        );
+        return {
+          ...prevCart,
+          [priceId]: { ...existingItem, quantity: existingItem.quantity - 1 },
+        };
       }
 
-      return prevCart.filter((item) => item.priceId !== priceId);
+      const newCart = { ...prevCart };
+      delete newCart[priceId];
+      return newCart;
     });
   };
 

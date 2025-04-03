@@ -41,6 +41,16 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  position: relative;
+  padding-right: 0.5rem;
+}
+
+.cart-num {
+  position: absolute;
+  top: -8;
+  right: -10;
+  color: #030615;
+  font-family: "Grenze", serif;
 }
 
 .header-content h1 {
@@ -148,15 +158,20 @@ main,
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 1rem;
   position: relative;
+  padding: 0 2rem;
 }
 
 .planner-container > div:first-of-type {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .planner-container > div:first-of-type img {
   position: sticky;
   top: 6rem;
+  max-width: 100%;
+  height: auto;
 }
 
 .planner-info {
@@ -201,6 +216,59 @@ main,
 .sticker-info h4 span {
   font-size: 0.8rem;
   padding-right: 0.1rem;
+}
+
+/* cart styles */
+.cart-section {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 1rem;
+  padding-bottom: 2rem;
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem padding 2rem 1rem;
+}
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-small);
+}
+
+.cart-item img {
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--border-radius-small);
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.cart-item-info input {
+  width: 100px;
+}
+
+.checkout-container {
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.checkout-container button {
+  font-size: 1.4rem;
+  padding: 0.5rem 1.5rem;
 }
 
 /* footer styles */
@@ -368,6 +436,14 @@ footer .links-container > div {
     gap: 1rem 2rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .cart-item {
+    gap: 2rem;
+  }
+
+  .cart-item img {
+    width: 20%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -402,4 +478,32 @@ footer .links-container > div {
   footer .links-container {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.scroll-to-top-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(51, 51, 51, 0.8);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.scroll-to-top-button:hover {
+  background-color: rgba(85, 85, 85, 0.9);
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Cart from "@/components/Cart";
 import EmailInput from "@/components/EmailInput";
 import { ProductProvider } from "@/context/ProductContext";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata = {
   title: "Smolstore",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
               </div>
             </header>
             <main>{children}</main>
+            <ScrollToTop />
           </div>
           <div className="hr" />
           <footer>

@@ -37,10 +37,10 @@ export default function Products(props) {
       <div className="section-container">
         <div className="section-header">
           <h2>Shop Our Selection</h2>
-          <p>From organisation or accessorization</p>
+          <p>From organization or accessorization</p>
         </div>
 
-        <div className="planner-container">
+        <div id="planner-section" className="planner-container">
           <div>
             <button
               onClick={() => {
@@ -98,7 +98,7 @@ export default function Products(props) {
           <h2>Or Collect Your Favorite Tech</h2>
           <p>Choose from our custom designed tech logos</p>
         </div>
-        <div className="sticker-container">
+        <div id="stickers-section" className="sticker-container">
           {stickers.map((sticker, stickerIndex) => {
             const stickerName = sticker.name;
             const stickerImgUrl = sticker.name
