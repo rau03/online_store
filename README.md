@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Smolstore - A Modern E-commerce Experience
 
-## Getting Started
+![Smolstore Banner](med_res/banner.png)
 
-First, run the development server:
+## 🌟 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Smolstore is a modern, responsive e-commerce platform built with Next.js, offering a seamless shopping experience for tech enthusiasts and productivity seekers. The store features a beautiful UI, smooth animations, and an intuitive user interface.
+
+## ✨ Features
+
+- 🎨 **Beautiful UI/UX**
+
+  - Smooth scroll animations
+  - High-resolution image loading with low-res placeholders
+  - Responsive design for all devices
+  - Modern and clean interface
+
+- 🛒 **Shopping Experience**
+
+  - Product browsing with high-quality images
+  - Interactive product previews
+  - Easy-to-use shopping cart
+  - Smooth checkout process
+
+- 🎯 **Product Categories**
+
+  - Tech Stickers Collection
+  - Medieval Dragon Month Planner
+  - More products coming soon!
+
+- 🛠️ **Technical Features**
+  - Client-side state management
+  - Optimized image loading
+  - Smooth scroll-to-section functionality
+  - Responsive navigation
+
+## 🚀 Tech Stack
+
+- **Frontend Framework**: Next.js
+- **Styling**: CSS Modules & Custom CSS
+- **State Management**: React Context API
+- **Deployment**: [Your deployment platform]
+- **Image Optimization**: Next.js Image Optimization
+
+## 📦 Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone [your-repo-url]
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file and add your environment variables:
+
+   ```env
+   # Add your environment variables here
+   ```
+
+4. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🏗️ Project Structure
+
+```
+online_store/
+├── app/
+│   ├── components/
+│   │   ├── Cart.jsx
+│   │   ├── EmailInput.jsx
+│   │   ├── ImageBanner.jsx
+│   │   ├── Portal.jsx
+│   │   ├── Products.jsx
+│   │   └── ScrollToTop.jsx
+│   ├── context/
+│   │   └── ProductContext.jsx
+│   ├── globals.css
+│   └── layout.js
+├── public/
+│   ├── low_res/
+│   └── med_res/
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Design System
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+The project uses a custom design system with:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Colors**: Clean, modern color palette
+- **Typography**: Readable and accessible fonts
+- **Spacing**: Consistent spacing system
+- **Components**: Reusable UI components
+- **Animations**: Smooth transitions and hover effects
 
-## Learn More
+## 🔧 Development
 
-To learn more about Next.js, take a look at the following resources:
+### Running Tests
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm test
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Building for Production
 
-## Deploy on Vercel
+```bash
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Linting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+- **Christopher Rau** - [webdevbyrau](https://rauwebport.netlify.app/)
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [FantaCSS](https://www.fantacss.smoljames.com/)
+- Icons by [Font Awesome](https://fontawesome.com/)
+
+---
+
+<div align="center">
+  <p>Made with ❤️ by <a href="https://rauwebport.netlify.app/">webdevbyrau</a></p>
+</div>
