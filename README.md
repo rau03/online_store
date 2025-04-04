@@ -1,5 +1,6 @@
 # 🛍️ Smolstore - A Modern E-commerce Experience
 
+![Smolstore Banner](med_res/banner.png)
 
 ## 🌟 Overview
 
@@ -38,7 +39,8 @@ Smolstore is a modern, responsive e-commerce platform built with Next.js, offeri
 - **Frontend Framework**: Next.js
 - **Styling**: CSS Modules & Custom CSS
 - **State Management**: React Context API
-- **Deployment**: [Your deployment platform]
+- **Payment Processing**: Stripe
+- **Deployment**: AWS Amplify
 - **Image Optimization**: Next.js Image Optimization
 
 ## 📦 Installation
@@ -58,7 +60,8 @@ Smolstore is a modern, responsive e-commerce platform built with Next.js, offeri
 3. Create a `.env` file and add your environment variables:
 
    ```env
-   # Add your environment variables here
+   STRIPE_SECRET_KEY=your_stripe_secret_key
+   NEXT_PUBLIC_BASE_URL=http://localhost:3000
    ```
 
 4. Run the development server:
@@ -120,6 +123,17 @@ npm run build
 ```bash
 npm run lint
 ```
+
+## 🚀 Deployment
+
+This project is configured for deployment on AWS Amplify. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+### Quick Deployment Steps
+
+1. Push your code to a Git repository
+2. Connect your repository to AWS Amplify
+3. Configure environment variables in the Amplify Console
+4. Deploy your application
 
 ## 🤝 Contributing
 
