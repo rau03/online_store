@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import "@/envConfig.js";
 
-const API_KEY = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+const API_KEY = process.env.STRIPE_SECRET_KEY;
 const stripe = new Stripe(API_KEY, {
   apiVersion: "2023-10-16",
 });
@@ -18,10 +18,10 @@ export async function POST(request) {
       line_items: cartItems,
       mode: "payment",
       success_url: `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
       }/success`,
       cancel_url: `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
       }/cart`,
     });
 
