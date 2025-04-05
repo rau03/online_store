@@ -4,14 +4,18 @@ frontend:
     preBuild:
       commands:
         - npm install
-        - env | grep -e NEXT_PUBLIC_ >> .env.production
     build:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: out
+    baseDirectory: .next
     files:
       - "**/*"
   cache:
     paths:
       - node_modules/**/*
+  customHeaders:
+    - pattern: "**/*"
+      headers:
+        - key: "Cache-Control"
+          value: "public, max-age=0, must-revalidate"
