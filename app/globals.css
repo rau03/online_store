@@ -48,7 +48,7 @@ header {
 .cart-num {
   position: absolute;
   top: -15px;
-  right: 10px;
+  right: -5px;
   color: #030615;
   font-family: "Grenze", serif;
   background-color: white;
