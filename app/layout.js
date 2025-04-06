@@ -8,8 +8,8 @@ import { ProductProvider } from "@/context/ProductContext";
 import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata = {
-  title: "Smolstore",
-  description: "A super cool store for programmers and productivity!",
+  title: "DigitalDragon Market",
+  description: "Digital planners and tech stickers for productivity!",
 };
 
 export default function RootLayout({ children }) {
@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
             <header>
               <div className="header-content">
                 <Link href={"/"}>
-                  <h1>Smolstore</h1>
+                  {/* <h1>The Digital Dragon Market</h1> */}
                 </Link>
 
                 <h5 className="mid-text">- Cool stuff for cool people -</h5>
