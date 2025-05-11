@@ -118,11 +118,17 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 
 .cta-btns-container h1 {
   font-size: 2rem;
   color: #000000;
+  text-align: center;
+}
+
+.cta-btns-container h3 {
+  text-align: center;
 }
 
 .cta-btns-container > div {
@@ -130,20 +136,25 @@ header {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 600px;
   gap: 1rem;
   padding: 2rem;
   background-color: white;
 }
+
 .cta-btns-container > div div:first-of-type {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .cta-btns-container > div div:last-of-type {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 main,
